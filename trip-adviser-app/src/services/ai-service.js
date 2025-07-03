@@ -1,7 +1,7 @@
 let languageModel = null;
 
 try {
-  if (window.LanguageModel) {
+  if (typeof LanguageModel === 'function') {
     // eslint-disable-next-line no-undef
     languageModel = await LanguageModel.create();
   }

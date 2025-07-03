@@ -18,14 +18,10 @@ export class TripAdviserApp extends LitElement {
     this.containerElement = this.renderRoot.querySelector('#container');
 
     this.navigateToPage('Home')();
-    // this.navigateToPage('View-Place', {
-    //   placeId: '68624471666a8a840f7c05c5',
-    // })();
-    // this.navigateToPage('Review-Comments')();
   }
 
   navigateToPage(pageKey, params = {}) {
-    return e => {
+    return async e => {
       e?.preventDefault();
 
       this.pageKey = pageKey;
@@ -35,25 +31,26 @@ export class TripAdviserApp extends LitElement {
 
       this.containerElement.innerHTML = 'Loading Page...';
 
-      import(`/src/pages/${pageKey.toLowerCase()}.js`).then(page => {
-        const htmlTag = `ta-${pageKey.toLowerCase()}`;
+      const page = await import(`/src/pages/${pageKey.toLowerCase()}.js`);
 
-        if (!customElements.get(htmlTag))
-          customElements.define(htmlTag, page.default);
+      const htmlTag = `ta-${pageKey.toLowerCase()}`;
 
-        const el = document.createElement(htmlTag);
+      if (!customElements.get(htmlTag))
+        customElements.define(htmlTag, page.default);
 
-        el.addEventListener('navigateToPage', navigationEvent =>
-          this.navigateToPage(
-            navigationEvent.detail.pageKey,
-            navigationEvent.detail.params,
-          )(),
-        );
-        el.params = params;
+      const el = document.createElement(htmlTag);
 
-        this.containerElement.removeChild(this.containerElement.childNodes[0]);
-        this.containerElement.appendChild(el);
-      });
+      el.addEventListener('navigateToPage', navigationEvent =>
+        this.navigateToPage(
+          navigationEvent.detail.pageKey,
+          navigationEvent.detail.params,
+        )(),
+      );
+
+      el.params = params;
+
+      this.containerElement.removeChild(this.containerElement.childNodes[0]);
+      this.containerElement.appendChild(el);
     };
   }
 
