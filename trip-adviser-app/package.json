@@ -1,0 +1,68 @@
+{
+  "name": "trip-adviser-app",
+  "description": "Webcomponent trip-adviser-app following open-wc recommendations",
+  "license": "MIT",
+  "author": "trip-adviser-app",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "index.js",
+  "module": "index.js",
+  "scripts": {
+    "analyze": "cem analyze --litelement",
+    "start": "web-dev-server",
+    "css:build": "npx @tailwindcss/cli -i ./src/styles/base.css -o ./src/styles/output.css --watch",
+    "lint": "eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
+    "format": "eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
+    "prepare": "husky",
+    "test": "web-test-runner --coverage",
+    "test:watch": "web-test-runner --watch",
+    "storybook": "npm run analyze -- --exclude dist && storybook dev -p 8080",
+    "storybook:build": "npm run analyze -- --exclude dist && storybook build"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.11",
+    "date-fns": "^4.1.0",
+    "lit": "^3.1.4",
+    "swiper": "^11.2.10",
+    "tailwindcss": "^4.1.11"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.10.3",
+    "@open-wc/eslint-config": "^12.0.3",
+    "@open-wc/testing": "^4.0.0",
+    "@storybook/addon-a11y": "^7.6.20",
+    "@storybook/addon-essentials": "^7.6.20",
+    "@storybook/addon-links": "^7.6.20",
+    "@storybook/web-components": "^7.6.20",
+    "@types/dom-chromium-ai": "^0.0.9",
+    "@web/dev-server": "^0.4.6",
+    "@web/storybook-builder": "^0.1.16",
+    "@web/storybook-framework-web-components": "^0.1.2",
+    "@web/test-runner": "^0.18.2",
+    "chai": "^5.2.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.2",
+    "sinon": "^21.0.0",
+    "storybook": "^7.6.20"
+  },
+  "customElements": "custom-elements.json",
+  "eslintConfig": {
+    "extends": [
+      "@open-wc",
+      "prettier"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+}
