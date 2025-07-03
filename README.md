@@ -20,6 +20,8 @@ Bootstrap mongo db container (Port `:27017`)
 docker compose up
 ```
 
+_Note: You can import [mock data](trip-adviser-api/data/trip-adviser-db.places.json) using [MongoDb Compass](https://www.mongodb.com/products/tools/compass)_
+
 ## Api Documents
 
 [trip-adviser-api/README.md](trip-adviser-api/README.md)

@@ -14,6 +14,14 @@ Start Development
 npm start
 ```
 
+## Compile Styles
+
+Generate `output.css`.
+
+```bash
+npm run css:build
+```
+
 ## Linting and formatting
 
 To scan the project for linting and formatting errors, run
